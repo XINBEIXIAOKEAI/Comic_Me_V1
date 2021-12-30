@@ -42,7 +42,7 @@ def main():
     comic_model = model_load()
 
 
-    menu = ['Image Based', 'URL']
+    menu = ['本機照片', 'URL']
     #menu = ['本機照片']
     st.sidebar.header('照片上傳選擇')
     choice = st.sidebar.selectbox('選擇上傳方式 ?', menu)
@@ -75,20 +75,7 @@ def main():
                 prediction=  prediction.numpy()
                 with col2:
                     st.image(prediction)
-        elif mode == '油畫風格':
-
-
-            st.title("Neural Style Transfer")
-            st.sidebar.title('Navigation')
-            method = st.sidebar.radio('Go To ->', options=['Webcam', 'Image'])
-            st.sidebar.header('Options')
-
-            style_model_name = st.sidebar.selectbox("Choose the style model: ", style_models_name)
-
-            if method == 'Image':
-                image_input(style_model_name)
-            else:
-                webcam_input(style_model_name)
+        #elif mode == '油畫風格':
 
     elif choice == 'URL':
         st.sidebar.header('配置')
@@ -116,19 +103,8 @@ def main():
                 prediction=  prediction.numpy()
                 with col2:
                     st.image(prediction)
-        elif mode == '油畫風格':
+        #elif mode == '油畫風格':
 
-            st.title("Neural Style Transfer")
-            st.sidebar.title('Navigation')
-            method = st.sidebar.radio('Go To ->', options=['Webcam', 'Image'])
-            st.sidebar.header('Options')
-
-            style_model_name = st.sidebar.selectbox("Choose the style model: ", style_models_name)
-
-            if method == 'Image':
-                image_input(style_model_name)
-            else:
-                webcam_input(style_model_name)
     #     class OpenCVVideoProcessor(VideoProcessorBase):
     #         def __init__(self) -> None:
     #             self._model_lock = threading.Lock()
