@@ -217,11 +217,9 @@ def main():
             st.image(img)
             def asciiart(in_f, SC, GCF,  out_f, color1='black', color2='blue', bgcolor='white'):
 
-                # The array of ascii symbols from white to black
                 chars = np.asarray(list(' .,:irs?@9B&#'))
 
-                # Load the fonts and then get the the height and width of a typical symbol 
-                # You can use different fonts here
+
                 font = ImageFont.load_default()
                 letter_width = font.getsize("x")[0]
                 letter_height = font.getsize("x")[1]
@@ -231,37 +229,29 @@ def main():
 
 
 
-                #Based on the desired output image size, calculate how many ascii letters are needed on the width and height
                 widthByLetter=round(img.size[0]*SC*WCF)
                 heightByLetter = round(img.size[1]*SC)
                 S = (widthByLetter, heightByLetter)
 
-                #Resize the image based on the symbol width and height
                 img = img.resize(S)
 
-                #Get the RGB color values of each sampled pixel point and convert them to graycolor using the average method.
-                # Refer to https://www.johndcook.com/blog/2009/08/24/algorithms-convert-color-grayscale/ to know about the algorithm
                 img = np.sum(np.asarray(img), axis=2)
 
-                # Normalize the results, enhance and reduce the brightness contrast. 
-                # Map grayscale values to bins of symbols
                 img -= img.min()
                 img = (1.0 - img/img.max())**GCF*(chars.size-1)
 
-                # Generate the ascii art symbols 
+
                 lines = ("\n".join( ("".join(r) for r in chars[img.astype(int)]) )).split("\n")
 
-                # Create gradient color bins
-                nbins = len(lines)
-                #colorRange =list(Color(color1).range_to(Color(color2), nbins))
 
-                #Create an image object, set its width and height
+                nbins = len(lines)
+
                 newImg_width= letter_width *widthByLetter
                 newImg_height = letter_height * heightByLetter
                 newImg = Image.new("RGBA", (newImg_width, newImg_height), bgcolor)
                 draw = ImageDraw.Draw(newImg)
 
-                # Print symbols to image
+
                 leftpadding=0
                 y = 0
                 lineIdx=0
@@ -272,9 +262,8 @@ def main():
                     draw.text((leftpadding, y), line, '#0000FF', font=font)
                     y += letter_height
 
-                # Save the image file
 
-                #out_f = out_f.resize((1280,720))
+
                 newImg.save(out_f)
 
 
@@ -306,61 +295,14 @@ def main():
               return img2	
 
 
-            if uploaded_file is not None:
+            if img is not None:
                 #src_image = load_image(uploaded_file)
-                image = Image.open(uploaded_file)	
+                image = Image.open(img)	
 
-                st.image(uploaded_file, caption='Input Image', use_column_width=True)
+                st.image(img, caption='Input Image', use_column_width=True)
                 #st.write(os.listdir())
-                im = imgGen2(uploaded_file)	
+                im = imgGen2(img)	
                 st.image(im, caption='ASCII art', use_column_width=True) 	
-    #     class OpenCVVideoProcessor(VideoProcessorBase):
-    #         def __init__(self) -> None:
-    #             self._model_lock = threading.Lock()
-    #             self.model = model_load()
-            
-    #         def recv(self, frame: av.VideoFrame):
-
-    #             img = frame.to_ndarray(format="bgr24")
-    #             img = cv2.flip(img, 1)
-    #             frame =loadframe(img)
-    #             frame = self.model(frame, training=True)
-    #             frame = tf.squeeze(frame,0)
-    #             frame = frame* 0.5 + 0.5
-    #             frame = tf.image.resize(frame, 
-    #                         [384, 384],
-    #                         method=tf.image.ResizeMethod.NEAREST_NEIGHBOR)
-    #             frame = frame.numpy()
-    #             print(type(frame))
-    #             print(frame.shape)
-
-    #             return av.VideoFrame.from_ndarray(frame, format="bgr24")
-
-        
-    #     webrtc_streamer(key="Test",
-    #     client_settings=WEBRTC_CLIENT_SETTINGS,
-    #     async_processing=True,video_processor_factory=OpenCVVideoProcessor,
-
-    # )
-    #    run = st.checkbox('Run')
-    #    FRAMEWINDOW = st.image([])
-    #    camera = cv2.VideoCapture(0)
-    #    gamma = st.slider('Gamma adjust', min_value=0.1, max_value=3.0,value=1.0,step=0.1)
-    #    while run:
-    #        _ , frame = camera.read()
-    #        frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-    #        frame  = cv2.flip(frame, 1)
-    #        frame = adjust_gamma(frame, gamma=gamma)
-    #        # Framecrop = st.checkbox('Auto Crop Frame')
-    #        frame = loadframe(frame)
-    #        frame = comic_model(frame, training=True)
-    #        frame = tf.squeeze(frame,0)
-    #        frame = frame* 0.5 + 0.5
-    #        frame = tf.image.resize(frame, 
-    #                        [384, 384],
-    #                        method=tf.image.ResizeMethod.NEAREST_NEIGHBOR)
-    #        frame = frame.numpy()
-    #        FRAMEWINDOW.image(frame)
 
 if __name__ == '__main__':
     main()
