@@ -281,7 +281,7 @@ def main():
 
             def imgGen2(img1):
               inputf = img1  # Input image file name
-
+              st.image(img1)
               SC = 0.1    # pixel sampling rate in width
               GCF= 2      # contrast adjustment
 
