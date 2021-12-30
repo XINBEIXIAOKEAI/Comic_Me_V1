@@ -216,7 +216,7 @@ def main():
             img = (response.content)
             st.image(img)
             def asciiart(in_f, SC, GCF,  out_f, color1='black', color2='blue', bgcolor='white'):
-                      
+            st.write('gg123')          
                 chars = np.asarray(list(' .,:irs?@9B&#'))
                 st.write('gg')
 
