@@ -45,13 +45,13 @@ def main():
     comic_model = model_load()
 
 
-    menu = ['本機照片', 'URL']
+    menu = ['Image Based', 'URL']
     #menu = ['本機照片']
     st.sidebar.header('照片上傳選擇')
     choice = st.sidebar.selectbox('選擇上傳方式 ?', menu)
 
     # Create the Home page
-    if choice == '本機照片':
+    if choice == 'Image Based':
         
         st.sidebar.header('配置')
         mode = st.sidebar.selectbox('模式選擇', ['漫畫風格','油畫風格'])
