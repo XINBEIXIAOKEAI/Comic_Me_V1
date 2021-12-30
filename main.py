@@ -5,8 +5,6 @@ from PIL import Image
 import requests
 from io import BytesIO
 import streamlit as st
-from data import *
-from input import image_input, webcam_input
 
 # from streamlit_webrtc import (
 #     AudioProcessorBase,
