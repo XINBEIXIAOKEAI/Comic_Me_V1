@@ -80,8 +80,9 @@ def main():
                     st.image(prediction)
         elif mode == '油畫風格':
             Image = st.file_uploader('在這上傳您的檔案',type=['jpg','jpeg','png'])
-            def asciiart(in_f, SC, GCF,  out_f, color1='black', color2='blue', bgcolor='white'):
             st.image(Image)
+            def asciiart(in_f, SC, GCF,  out_f, color1='black', color2='blue', bgcolor='white'):
+            
                 # The array of ascii symbols from white to black
                 chars = np.asarray(list(' .,:irs?@9B&#'))
 
