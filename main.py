@@ -216,9 +216,9 @@ def main():
             img = (response.content)
             st.image(img)
             def asciiart(in_f, SC, GCF,  out_f, color1='black', color2='blue', bgcolor='white'):
-
+                      
                 chars = np.asarray(list(' .,:irs?@9B&#'))
-
+                st.write('gg')
 
                 font = ImageFont.load_default()
                 letter_width = font.getsize("x")[0]
@@ -281,7 +281,6 @@ def main():
 
             def imgGen2(img1):
               inputf = img1  # Input image file name
-              st.write('gg')
               SC = 0.1    # pixel sampling rate in width
               GCF= 2      # contrast adjustment
 
