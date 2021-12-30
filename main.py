@@ -79,107 +79,107 @@ def main():
                 with col2:
                     st.image(prediction)
         elif mode == '油畫風格':
-            Image = st.file_uploader('在這上傳您的檔案',type=['jpg','jpeg','png'])
-            def asciiart(in_f, SC, GCF,  out_f, color1='black', color2='blue', bgcolor='white'):
-
-                # The array of ascii symbols from white to black
-                chars = np.asarray(list(' .,:irs?@9B&#'))
-
-                # Load the fonts and then get the the height and width of a typical symbol 
-                # You can use different fonts here
-                font = ImageFont.load_default()
-                letter_width = font.getsize("x")[0]
-                letter_height = font.getsize("x")[1]
-
-                WCF = letter_height/letter_width
-
-                #open the input file
-                Image = Image.open(in_f)
+            img = st.file_uploader('在這上傳您的檔案',type=['jpg','jpeg','png'])
+                def asciiart(in_f, SC, GCF,  out_f, color1='black', color2='blue', bgcolor='white'):
                 st.image(Image)
+                    # The array of ascii symbols from white to black
+                    chars = np.asarray(list(' .,:irs?@9B&#'))
 
-                #Based on the desired output image size, calculate how many ascii letters are needed on the width and height
-                widthByLetter=round(img.size[0]*SC*WCF)
-                heightByLetter = round(img.size[1]*SC)
-                S = (widthByLetter, heightByLetter)
+                    # Load the fonts and then get the the height and width of a typical symbol 
+                    # You can use different fonts here
+                    font = ImageFont.load_default()
+                    letter_width = font.getsize("x")[0]
+                    letter_height = font.getsize("x")[1]
 
-                #Resize the image based on the symbol width and height
-                Image = Image.resize(S)
+                    WCF = letter_height/letter_width
 
-                #Get the RGB color values of each sampled pixel point and convert them to graycolor using the average method.
-                # Refer to https://www.johndcook.com/blog/2009/08/24/algorithms-convert-color-grayscale/ to know about the algorithm
-                Image = np.sum(np.asarray(img), axis=2)
+                    #open the input file
+                    img = Image.open(in_f)
+                    st.image(Image)
 
-                # Normalize the results, enhance and reduce the brightness contrast. 
-                # Map grayscale values to bins of symbols
-                Image -= Image.min()
-                Image = (1.0 - Image/Image.max())**GCF*(chars.size-1)
+                    #Based on the desired output image size, calculate how many ascii letters are needed on the width and height
+                    widthByLetter=round(img.size[0]*SC*WCF)
+                    heightByLetter = round(img.size[1]*SC)
+                    S = (widthByLetter, heightByLetter)
 
-                # Generate the ascii art symbols 
-                lines = ("\n".join( ("".join(r) for r in chars[Image.astype(int)]) )).split("\n")
+                    #Resize the image based on the symbol width and height
+                    Image = Image.resize(S)
 
-                # Create gradient color bins
-                nbins = len(lines)
-                #colorRange =list(Color(color1).range_to(Color(color2), nbins))
+                    #Get the RGB color values of each sampled pixel point and convert them to graycolor using the average method.
+                    # Refer to https://www.johndcook.com/blog/2009/08/24/algorithms-convert-color-grayscale/ to know about the algorithm
+                    Image = np.sum(np.asarray(img), axis=2)
 
-                #Create an image object, set its width and height
-                newImg_width= letter_width *widthByLetter
-                newImg_height = letter_height * heightByLetter
-                newImg = Image.new("RGBA", (newImg_width, newImg_height), bgcolor)
-                draw = ImageDraw.Draw(newImg)
+                    # Normalize the results, enhance and reduce the brightness contrast. 
+                    # Map grayscale values to bins of symbols
+                    Image -= Image.min()
+                    Image = (1.0 - Image/Image.max())**GCF*(chars.size-1)
 
-                # Print symbols to image
-                leftpadding=0
-                y = 0
-                lineIdx=0
-                for line in lines:
-                    color = 'blue'
-                    lineIdx +=1
+                    # Generate the ascii art symbols 
+                    lines = ("\n".join( ("".join(r) for r in chars[Image.astype(int)]) )).split("\n")
 
-                    draw.text((leftpadding, y), line, '#0000FF', font=font)
-                    y += letter_height
+                    # Create gradient color bins
+                    nbins = len(lines)
+                    #colorRange =list(Color(color1).range_to(Color(color2), nbins))
 
-                # Save the image file
+                    #Create an image object, set its width and height
+                    newImg_width= letter_width *widthByLetter
+                    newImg_height = letter_height * heightByLetter
+                    newImg = Image.new("RGBA", (newImg_width, newImg_height), bgcolor)
+                    draw = ImageDraw.Draw(newImg)
 
-                #out_f = out_f.resize((1280,720))
-                newImg.save(out_f)
+                    # Print symbols to image
+                    leftpadding=0
+                    y = 0
+                    lineIdx=0
+                    for line in lines:
+                        color = 'blue'
+                        lineIdx +=1
 
+                        draw.text((leftpadding, y), line, '#0000FF', font=font)
+                        y += letter_height
 
-            def load_image(filename, size=(512,512)):
-                # load image with the preferred size
-                pixels = load_img(filename, target_size=size)
-                # convert to numpy array
-                pixels = img_to_array(pixels)
-                # scale from [0,255] to [-1,1]
-                pixels = (pixels - 127.5) / 127.5
-                # reshape to 1 sample
-                pixels = expand_dims(pixels, 0)
-                return pixels
+                    # Save the image file
 
-
-            def imgGen2(img1):
-              inputf = img1  # Input image file name
-
-              SC = 0.1    # pixel sampling rate in width
-              GCF= 2      # contrast adjustment
-
-              asciiart(inputf, SC, GCF, "results.png")   #default color, black to blue
-              asciiart(inputf, SC, GCF, "results_pink.png","blue","pink")
-              img = Image.open(img1)
-              img2 = Image.open('results.png').resize(img.size)
-              #img2.save('result.png')
-              #img3 = Image.open('results_pink.png').resize(img.size)
-              #img3.save('resultp.png')
-              return img2	
+                    #out_f = out_f.resize((1280,720))
+                    newImg.save(out_f)
 
 
-            if uploaded_file is not None:
-                #src_image = load_image(uploaded_file)
-                image = Image.open(uploaded_file)	
+                def load_image(filename, size=(512,512)):
+                    # load image with the preferred size
+                    pixels = load_img(filename, target_size=size)
+                    # convert to numpy array
+                    pixels = img_to_array(pixels)
+                    # scale from [0,255] to [-1,1]
+                    pixels = (pixels - 127.5) / 127.5
+                    # reshape to 1 sample
+                    pixels = expand_dims(pixels, 0)
+                    return pixels
 
-                st.image(uploaded_file, caption='Input Image', use_column_width=True)
-                #st.write(os.listdir())
-                im = imgGen2(uploaded_file)	
-                st.image(im, caption='ASCII art', use_column_width=True) 	
+
+                def imgGen2(img1):
+                  inputf = img1  # Input image file name
+
+                  SC = 0.1    # pixel sampling rate in width
+                  GCF= 2      # contrast adjustment
+
+                  asciiart(inputf, SC, GCF, "results.png")   #default color, black to blue
+                  asciiart(inputf, SC, GCF, "results_pink.png","blue","pink")
+                  img = Image.open(img1)
+                  img2 = Image.open('results.png').resize(img.size)
+                  #img2.save('result.png')
+                  #img3 = Image.open('results_pink.png').resize(img.size)
+                  #img3.save('resultp.png')
+                  return img2	
+
+
+                if uploaded_file is not None:
+                    #src_image = load_image(uploaded_file)
+                    image = Image.open(uploaded_file)	
+
+                    st.image(uploaded_file, caption='Input Image', use_column_width=True)
+                    #st.write(os.listdir())
+                    im = imgGen2(uploaded_file)	
+                    st.image(im, caption='ASCII art', use_column_width=True) 	
     elif choice == 'URL':
         st.sidebar.header('配置')
         mode = st.sidebar.selectbox('模式選擇', ['漫畫風格','油畫風格'])
