@@ -80,7 +80,7 @@ def main():
                     st.image(prediction)
         elif mode == '油畫風格':
             img = st.file_uploader('在這上傳您的檔案',type=['jpg','jpeg','png'])
-            st.image(Image)
+            st.image(img)
             def asciiart(in_f, SC, GCF,  out_f, color1='black', color2='blue', bgcolor='white'):
             
                 # The array of ascii symbols from white to black
@@ -214,6 +214,7 @@ def main():
             url = st.text_input('網址連結')
             response = requests.get(url)
             img = (response.content)
+                st.image(img)
             def asciiart(in_f, SC, GCF,  out_f, color1='black', color2='blue', bgcolor='white'):
 
                 # The array of ascii symbols from white to black
