@@ -95,7 +95,7 @@ def main():
                 WCF = letter_height/letter_width
 
                 #open the input file
-                img = Image.open(in_f)
+                Image = Image.open(in_f)
                 st.image(Image)
 
                 #Based on the desired output image size, calculate how many ascii letters are needed on the width and height
