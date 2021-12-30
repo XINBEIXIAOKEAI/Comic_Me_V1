@@ -5,7 +5,8 @@ from PIL import Image
 import requests
 from io import BytesIO
 import streamlit as st
-
+from data import *
+from input import image_input, webcam_input
 
 # from streamlit_webrtc import (
 #     AudioProcessorBase,
@@ -33,7 +34,7 @@ def main():
     st.set_page_config(layout="wide")
     
     st.image(os.path.join('Images','Banner No2.png'), use_column_width  = True)
-    st.markdown("<h1 style='text-align: center; color: white;'>是時候成為漫畫人物了</h1>", unsafe_allow_html=True)
+    st.markdown("<h1 style='text-align: center; color: white;'>是時候改變不同風格了~</h1>", unsafe_allow_html=True)
     with st.beta_expander("Configuration Option"):
 
         st.write("**AutoCrop** help the model by finding and cropping the biggest face it can find.")
@@ -42,7 +43,7 @@ def main():
 
 
     menu = ['Image Based', 'URL']
-    #menu = ['Image Based']
+    #menu = ['本機照片']
     st.sidebar.header('照片上傳選擇')
     choice = st.sidebar.selectbox('選擇上傳方式 ?', menu)
 
@@ -74,7 +75,20 @@ def main():
                 prediction=  prediction.numpy()
                 with col2:
                     st.image(prediction)
-            #elif mode == '油畫風格':
+        elif mode == '油畫風格':
+
+
+            st.title("Neural Style Transfer")
+            st.sidebar.title('Navigation')
+            method = st.sidebar.radio('Go To ->', options=['Webcam', 'Image'])
+            st.sidebar.header('Options')
+
+            style_model_name = st.sidebar.selectbox("Choose the style model: ", style_models_name)
+
+            if method == 'Image':
+                image_input(style_model_name)
+            else:
+                webcam_input(style_model_name)
 
     elif choice == 'URL':
         st.sidebar.header('配置')
@@ -85,11 +99,9 @@ def main():
         if mode == '漫畫風格': 
             url = st.text_input('網址連結')
             response = requests.get(url)
-        # st.write(response.content)
             Image = (response.content)
             if Image is not None:
                 col1, col2 = st.beta_columns(2)
-            #  Image = Image.read()
                 Image = tf.image.decode_image(Image).numpy()
                 Image = adjust_gamma(Image, gamma=gamma)
                 with col1:
@@ -104,7 +116,19 @@ def main():
                 prediction=  prediction.numpy()
                 with col2:
                     st.image(prediction)
-       
+        elif mode == '油畫風格':
+
+            st.title("Neural Style Transfer")
+            st.sidebar.title('Navigation')
+            method = st.sidebar.radio('Go To ->', options=['Webcam', 'Image'])
+            st.sidebar.header('Options')
+
+            style_model_name = st.sidebar.selectbox("Choose the style model: ", style_models_name)
+
+            if method == 'Image':
+                image_input(style_model_name)
+            else:
+                webcam_input(style_model_name)
     #     class OpenCVVideoProcessor(VideoProcessorBase):
     #         def __init__(self) -> None:
     #             self._model_lock = threading.Lock()
