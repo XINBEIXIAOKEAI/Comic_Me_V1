@@ -214,7 +214,7 @@ def main():
             url = st.text_input('網址連結')
             response = requests.get(url)
             img = (response.content)
-                st.image(img)
+            st.image(img)
             def asciiart(in_f, SC, GCF,  out_f, color1='black', color2='blue', bgcolor='white'):
 
                 # The array of ascii symbols from white to black
