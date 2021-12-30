@@ -78,7 +78,7 @@ def main():
                 prediction=  prediction.numpy()
                 with col2:
                     st.image(prediction)
-        elif mode == '油畫風格':
+        #elif mode == '油畫風格':
             uploaded_file = st.file_uploader("Choose an image...")
 
             def asciiart(in_f, SC, GCF,  out_f, color1='black', color2='blue', bgcolor='white'):
