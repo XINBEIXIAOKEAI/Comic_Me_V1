@@ -61,6 +61,25 @@ def main():
         gamma = st.sidebar.slider('Gamma 調整', min_value=0.1, max_value=3.0,value=1.0,step=0.1) # change the value here to get different result
 
         if mode == '漫畫風格':
+            Image = st.file_uploader('在這上傳您的檔案',type=['jpg','jpeg','png'])
+            if Image is not None:
+                col1, col2 = st.beta_columns(2)
+                Image = Image.read()
+                Image = tf.image.decode_image(Image, channels=3).numpy()                  
+                Image = adjust_gamma(Image, gamma=gamma)
+                with col1:
+                    st.image(Image)
+                input_image = loadtest(Image,cropornot=Autocrop)
+                prediction = comic_model(input_image, training=True)
+                prediction = tf.squeeze(prediction,0)
+                prediction = prediction* 0.5 + 0.5
+                prediction = tf.image.resize(prediction, 
+                            [outputsize, outputsize],
+                            method=tf.image.ResizeMethod.NEAREST_NEIGHBOR)
+                prediction=  prediction.numpy()
+                with col2:
+                    st.image(prediction)
+        elif mode == '油畫風格':
 
     elif choice == 'URL':
         st.sidebar.header('配置')
