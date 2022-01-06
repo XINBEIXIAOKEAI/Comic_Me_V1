@@ -272,7 +272,7 @@ def main():
 
         if uploaded_file is not None:
     #src_image = load_image(uploaded_file)
-        image = Image.open(uploaded_file)	
+            image = Image.open(uploaded_file)	
 	
             st.image(uploaded_file, caption='Input Image', use_column_width=True)
     #st.write(os.listdir())
