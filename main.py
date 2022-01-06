@@ -76,8 +76,8 @@ def main():
                         method=tf.image.ResizeMethod.NEAREST_NEIGHBOR)
             prediction=  prediction.numpy()
             with col2:
-            if mode == '漫畫風格':
-                st.image(prediction)
+                if mode == '漫畫風格':
+                    st.image(prediction)
     elif mode == '油畫風格':
         uploaded_file = st.file_uploader("Choose an image...")
 
