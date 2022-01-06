@@ -171,13 +171,13 @@ def main():
             with col2:
                 st.image(prediction)
 
-        if uploaded_file is not None:
-            #src_image = load_image(uploaded_file)
-            image = Image.open(uploaded_file)	
+        if file_uploader is not None:
+            #src_image = load_image(file_uploader)
+            image = Image.open(file_uploader)	
 
-            st.image(uploaded_file, caption='Input Image', use_column_width=True)
+            st.image(file_uploader, caption='Input Image', use_column_width=True)
             #st.write(os.listdir())
-            im = imgGen2(uploaded_file)	
+            im = imgGen2(file_uploader)	
             st.image(im, caption='ASCII art', use_column_width=True)
             
     elif choice == 'URL':
