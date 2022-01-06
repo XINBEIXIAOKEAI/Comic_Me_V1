@@ -170,7 +170,7 @@ def main():
             prediction=  prediction.numpy()
             with col2:
                 st.image(prediction)
-
+        Image = st.file_uploader('在這上傳您的檔案',type=['jpg','jpeg','png'])
         if file_uploader is not None:
             #src_image = load_image(file_uploader)
             image = Image.open(file_uploader)	
