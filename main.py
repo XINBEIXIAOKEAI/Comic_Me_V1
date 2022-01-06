@@ -190,7 +190,7 @@ def main():
         letter_width = font.getsize("x")[0]
         letter_height = font.getsize("x")[1]
 
-            WCF = letter_height/letter_width
+    	WCF = letter_height/letter_width
 
     #open the input file
             img = Image.open(in_f)
