@@ -114,7 +114,32 @@ def main():
         st.write("**AutoCrop** help the model by finding and cropping the biggest face it can find.")
         st.write("**Gamma Adjustment** can be used to lighten/darken the image")
     comic_model = model_load()
+            def load_image(filename, size=(512,512)):
+	# load image with the preferred size
+	            pixels = load_img(filename, target_size=size)
+	# convert to numpy array
+	            pixels = img_to_array(pixels)
+	# scale from [0,255] to [-1,1]
+	            pixels = (pixels - 127.5) / 127.5
+	# reshape to 1 sample
+	            pixels = expand_dims(pixels, 0)
+	            return pixels
 
+
+def imgGen2(img1):
+    inputf = img1  # Input image file name
+
+    SC = 0.1    # pixel sampling rate in width
+    GCF= 2      # contrast adjustment
+
+    asciiart(inputf, SC, GCF, "results.png")   #default color, black to blue
+    asciiart(inputf, SC, GCF, "results_pink.png","blue","pink")
+    img = Image.open(img1)
+    img2 = Image.open('results.png').resize(img.size)
+  #img2.save('result.png')
+  #img3 = Image.open('results_pink.png').resize(img.size)
+  #img3.save('resultp.png')
+    return img2	
 
     menu = ['Image Based', 'URL']
     #menu = ['本機照片']
@@ -166,32 +191,7 @@ def main():
 
 
 
-            def load_image(filename, size=(512,512)):
-	# load image with the preferred size
-	            pixels = load_img(filename, target_size=size)
-	# convert to numpy array
-	            pixels = img_to_array(pixels)
-	# scale from [0,255] to [-1,1]
-	            pixels = (pixels - 127.5) / 127.5
-	# reshape to 1 sample
-	            pixels = expand_dims(pixels, 0)
-	            return pixels
 
-
-            def imgGen2(img1):
-              inputf = img1  # Input image file name
-
-              SC = 0.1    # pixel sampling rate in width
-              GCF= 2      # contrast adjustment
-
-              asciiart(inputf, SC, GCF, "results.png")   #default color, black to blue
-              asciiart(inputf, SC, GCF, "results_pink.png","blue","pink")
-              img = Image.open(img1)
-              img2 = Image.open('results.png').resize(img.size)
-  #img2.save('result.png')
-  #img3 = Image.open('results_pink.png').resize(img.size)
-  #img3.save('resultp.png')
-            return img2	
 
 
 
