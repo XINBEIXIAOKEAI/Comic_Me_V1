@@ -93,7 +93,17 @@ def asciiart(in_f, SC, GCF,  out_f, color1='black', color2='blue', bgcolor='whit
 
     #out_f = out_f.resize((1280,720))
     newImg.save(out_f)
+def imgGen2(img1):
+	inputf = img1  # Input image file name
 
+	SC = 0.1    # pixel sampling rate in width
+	GCF= 2      # contrast adjustment
+
+	asciiart(inputf, SC, GCF, "results.png")   #default color, black to blue
+	asciiart(inputf, SC, GCF, "results_pink.png","blue","pink")
+	img = Image.open(img1)
+	img2 = Image.open('results.png').resize(img.size)
+	
 def main():
     st.set_page_config(layout="wide")
     
