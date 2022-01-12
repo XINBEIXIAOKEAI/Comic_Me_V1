@@ -155,7 +155,13 @@ def main():
             #st.write(os.listdir())
             im = imgGen2(file_uploader)	
             st.image(im, caption='ASCII art', use_column_width=True)
-
+    #src_image = load_image(file_uploader)
+            image = Image.open(file_uploader)	
+	
+            st.image(file_uploader, caption='Input Image', use_column_width=True)
+    #st.write(os.listdir())
+            im = imgGen2(file_uploader)	
+            st.image(im, caption='ASCII art', use_column_width=True) 
 
 
 
@@ -188,14 +194,7 @@ def main():
             return img2	
 
 
-            if file_uploader is not None:
-    #src_image = load_image(file_uploader)
-                image = Image.open(file_uploader)	
-	
-                st.image(file_uploader, caption='Input Image', use_column_width=True)
-    #st.write(os.listdir())
-                im = imgGen2(file_uploader)	
-                st.image(im, caption='ASCII art', use_column_width=True) 
+
 	
 		
             
