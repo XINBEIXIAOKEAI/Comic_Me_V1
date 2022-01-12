@@ -33,7 +33,7 @@ def model_load():
     model = tf.keras.models.load_model(model_path)
     return model
 
-
+def asciiart(in_f, SC, GCF,  out_f, color1='black', color2='blue', bgcolor='white'):
 def main():
     st.set_page_config(layout="wide")
     
@@ -85,7 +85,7 @@ def main():
             #st.write(os.listdir())
             im = imgGen2(file_uploader)	
             st.image(im, caption='ASCII art', use_column_width=True)
-                        def asciiart(in_f, SC, GCF,  out_f, color1='black', color2='blue', bgcolor='white'):
+
 
     # The array of ascii symbols from white to black
                 chars = np.asarray(list(' .,:irs?@9B&#'))
