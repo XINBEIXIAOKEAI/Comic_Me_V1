@@ -94,7 +94,7 @@ def imgGen2(img1):
             prediction=  prediction.numpy()
             with col2:
                 st.image(prediction)
-        Image = st.file_uploader('在這上傳您的檔案',type=['jpg','jpeg','png'])
+	Image = st.file_uploader('在這上傳您的檔案',type=['jpg','jpeg','png'])
         if file_uploader is not None:
 	def asciiart(in_f, SC, GCF,  out_f, color1='black', color2='blue', bgcolor='white'):
 	    chars = np.asarray(list(' .,:irs?@9B&#'))
