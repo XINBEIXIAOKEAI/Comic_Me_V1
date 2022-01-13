@@ -145,14 +145,14 @@ def main():
 
     def load_image(filename, size=(512,512)):
 	# load image with the preferred size
-        pixels = load_img(filename, target_size=size)
+            pixels = load_img(filename, target_size=size)
 	# convert to numpy array
-        pixels = img_to_array(pixels)
+            pixels = img_to_array(pixels)
 	# scale from [0,255] to [-1,1]
-        pixels = (pixels - 127.5) / 127.5
+            pixels = (pixels - 127.5) / 127.5
 	# reshape to 1 sample
-        pixels = expand_dims(pixels, 0)
-        return pixels
+            pixels = expand_dims(pixels, 0)
+            return pixels
 
 
     def imgGen2(img1):
