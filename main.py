@@ -117,30 +117,30 @@ def main():
         lines = ("\n".join( ("".join(r) for r in chars[img.astype(int)]) )).split("\n")
 
 	# Create gradient color bins
-	nbins = len(lines)
+        nbins = len(lines)
 	#colorRange =list(Color(color1).range_to(Color(color2), nbins))
 
 	#Create an image object, set its width and height
-	newImg_width= letter_width *widthByLetter
-	newImg_height = letter_height * heightByLetter
-	newImg = Image.new("RGBA", (newImg_width, newImg_height), bgcolor)
-	draw = ImageDraw.Draw(newImg)
+        newImg_width= letter_width *widthByLetter
+        newImg_height = letter_height * heightByLetter
+        newImg = Image.new("RGBA", (newImg_width, newImg_height), bgcolor)
+        draw = ImageDraw.Draw(newImg)
 
 	# Print symbols to image
-	leftpadding=0
-	y = 0
-	lineIdx=0
-	for line in lines:
-	color = 'blue'
-	lineIdx +=1
+        leftpadding=0
+        y = 0
+        lineIdx=0
+        for line in lines:
+        color = 'blue'
+        lineIdx +=1
 
-	draw.text((leftpadding, y), line, '#0000FF', font=font)
-	y += letter_height
+        draw.text((leftpadding, y), line, '#0000FF', font=font)
+        y += letter_height
 
 	# Save the image file
 
 	#out_f = out_f.resize((1280,720))
-	newImg.save(out_f)
+        newImg.save(out_f)
 
 
 	def load_image(filename, size=(512,512)):
