@@ -154,58 +154,58 @@ def main():
         if Image is not None:
 		
 	#src_image = load_image(Image)
-	    image = Image.open(Image)	
+		image = Image.open(Image)	
 
-	    st.image(Image, caption='Input Image', use_column_width=True)
+		st.image(Image, caption='Input Image', use_column_width=True)
 			#st.write(os.listdir())
-	    im = imgGen2(Image)	
-	    st.image(im, caption='ASCII art', use_column_width=True) 
+		im = imgGen2(Image)	
+		st.image(im, caption='ASCII art', use_column_width=True) 
 
+		col1, col2 = st.beta_columns(2)
+		Image = Image.read()
+		Image = tf.image.decode_image(Image, channels=3).numpy()                  
+		Image = adjust_gamma(Image, gamma=gamma)
+		with col1:
+		    st.image(Image)
+		input_image = loadtest(Image,cropornot=Autocrop)
+		prediction = comic_model(input_image, training=True)
+		prediction = tf.squeeze(prediction,0)
+		prediction = prediction* 0.5 + 0.5
+		prediction = tf.image.resize(prediction, 
+		    [outputsize, outputsize],
+		    method=tf.image.ResizeMethod.NEAREST_NEIGHBOR)
+		    prediction=  prediction.numpy()
+		with col2:
+		    st.image(prediction)
+
+    elif choice == 'URL':
+	st.sidebar.header('配置')
+
+	outputsize = st.sidebar.selectbox('輸出尺寸', [384,512,768])
+	Autocrop = st.sidebar.checkbox('自動裁剪照片',value=True) 
+	gamma = st.sidebar.slider('Gamma 調整', min_value=0.1, max_value=3.0,value=1.0,step=0.1) # change the value here to get different result
+
+
+	url = st.text_input('網址連結')
+	response = requests.get(url)
+	Image = (response.content)
+	if Image is not None:
 	    col1, col2 = st.beta_columns(2)
-	    Image = Image.read()
-	    Image = tf.image.decode_image(Image, channels=3).numpy()                  
+	    Image = tf.image.decode_image(Image).numpy()
 	    Image = adjust_gamma(Image, gamma=gamma)
 	    with col1:
-	    	    st.image(Image)
-	    input_image = loadtest(Image,cropornot=Autocrop)
-	    prediction = comic_model(input_image, training=True)
+		st.image(Image)
+	    text_input = loadtest(Image,cropornot=Autocrop)
+	    prediction = comic_model(text_input, training=True)
 	    prediction = tf.squeeze(prediction,0)
 	    prediction = prediction* 0.5 + 0.5
 	    prediction = tf.image.resize(prediction, 
-	    	    [outputsize, outputsize],
-	    	    method=tf.image.ResizeMethod.NEAREST_NEIGHBOR)
-	    	    prediction=  prediction.numpy()
+			 [outputsize, outputsize],
+			method=tf.image.ResizeMethod.NEAREST_NEIGHBOR)
+	    prediction=  prediction.numpy()
 	    with col2:
-	    	    st.image(prediction)
+		st.image(prediction)
 
-	    elif choice == 'URL':
-		st.sidebar.header('配置')
-
-		outputsize = st.sidebar.selectbox('輸出尺寸', [384,512,768])
-		Autocrop = st.sidebar.checkbox('自動裁剪照片',value=True) 
-		gamma = st.sidebar.slider('Gamma 調整', min_value=0.1, max_value=3.0,value=1.0,step=0.1) # change the value here to get different result
-
-
-		url = st.text_input('網址連結')
-		response = requests.get(url)
-		Image = (response.content)
-		if Image is not None:
-		    col1, col2 = st.beta_columns(2)
-		    Image = tf.image.decode_image(Image).numpy()
-		    Image = adjust_gamma(Image, gamma=gamma)
-		    with col1:
-			st.image(Image)
-		    text_input = loadtest(Image,cropornot=Autocrop)
-		    prediction = comic_model(text_input, training=True)
-		    prediction = tf.squeeze(prediction,0)
-		    prediction = prediction* 0.5 + 0.5
-		    prediction = tf.image.resize(prediction, 
-				 [outputsize, outputsize],
-				method=tf.image.ResizeMethod.NEAREST_NEIGHBOR)
-		    prediction=  prediction.numpy()
-		    with col2:
-			st.image(prediction)
- 
 
 if __name__ == '__main__':
     main()
