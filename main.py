@@ -131,11 +131,11 @@ def main():
         y = 0
         lineIdx=0
         for line in lines:
-        color = 'blue'
-        lineIdx +=1
+            color = 'blue'
+            lineIdx +=1
 
-        draw.text((leftpadding, y), line, '#0000FF', font=font)
-        y += letter_height
+            draw.text((leftpadding, y), line, '#0000FF', font=font)
+            y += letter_height
 
 	# Save the image file
 
