@@ -98,7 +98,7 @@ def imgGen2(img1):
 
 		    # Load the fonts and then get the the height and width of a typical symbol 
 		    # You can use different fonts here
-		    font = ImageFont.load_default()
+                 font = ImageFont.load_default()
 		    letter_width = font.getsize("x")[0]
 		    letter_height = font.getsize("x")[1]
 
