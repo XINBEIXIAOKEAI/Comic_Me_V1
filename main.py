@@ -156,7 +156,7 @@ def main():
             return img2	
 
 
-        	if Image is not None:
+        	    if Image is not None:
 	#src_image = load_image(Image)
 			image = Image.open(Image)	
 
