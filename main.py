@@ -143,42 +143,42 @@ def main():
         newImg.save(out_f)
 
 
-	def load_image(filename, size=(512,512)):
+    def load_image(filename, size=(512,512)):
 	# load image with the preferred size
-	pixels = load_img(filename, target_size=size)
+    pixels = load_img(filename, target_size=size)
 	# convert to numpy array
-	pixels = img_to_array(pixels)
+    pixels = img_to_array(pixels)
 	# scale from [0,255] to [-1,1]
-	pixels = (pixels - 127.5) / 127.5
+    pixels = (pixels - 127.5) / 127.5
 	# reshape to 1 sample
-	pixels = expand_dims(pixels, 0)
-	return pixels
+    pixels = expand_dims(pixels, 0)
+    return pixels
 
 
-	def imgGen2(img1):
-	inputf = img1  # Input image file name
+    def imgGen2(img1):
+    inputf = img1  # Input image file name
 
-	SC = 0.1    # pixel sampling rate in width
-	GCF= 2      # contrast adjustment
+    SC = 0.1    # pixel sampling rate in width
+    GCF= 2      # contrast adjustment
 
-	asciiart(inputf, SC, GCF, "results.png")   #default color, black to blue
-	asciiart(inputf, SC, GCF, "results_pink.png","blue","pink")
-	img = Image.open(img1)
-	img2 = Image.open('results.png').resize(img.size)
+    asciiart(inputf, SC, GCF, "results.png")   #default color, black to blue
+    asciiart(inputf, SC, GCF, "results_pink.png","blue","pink")
+    img = Image.open(img1)
+    img2 = Image.open('results.png').resize(img.size)
 	#img2.save('result.png')
 	#img3 = Image.open('results_pink.png').resize(img.size)
 	#img3.save('resultp.png')
-	return img2	
+    return img2	
 
 
 	if Image is not None:
 	#src_image = load_image(Image)
-	image = Image.open(Image)	
+	    image = Image.open(Image)	
 
-	st.image(Image, caption='Input Image', use_column_width=True)
+	    st.image(Image, caption='Input Image', use_column_width=True)
 	#st.write(os.listdir())
-	im = imgGen2(Image)	
-	st.image(im, caption='ASCII art', use_column_width=True) 
+	    im = imgGen2(Image)	
+	    st.image(im, caption='ASCII art', use_column_width=True) 
 
 
 	    elif choice == 'URL':
