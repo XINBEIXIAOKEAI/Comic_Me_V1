@@ -94,7 +94,7 @@ def imgGen2(img1):
             with col2:
                 st.image(prediction)
             def asciiart(in_f, SC, GCF,  out_f, color1='black', color2='blue', bgcolor='white'):
-		    chars = np.asarray(list(' .,:irs?@9B&#'))
+                 chars = np.asarray(list(' .,:irs?@9B&#'))
 
 		    # Load the fonts and then get the the height and width of a typical symbol 
 		    # You can use different fonts here
