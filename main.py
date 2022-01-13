@@ -159,10 +159,10 @@ def imgGen2(img1):
              SC = 0.1    # pixel sampling rate in width
              GCF= 2      # contrast adjustment
 
-		asciiart(inputf, SC, GCF, "results.png")   #default color, black to blue
-		asciiart(inputf, SC, GCF, "results_pink.png","blue","pink")
-		img = Image.open(img1)
-		img2 = Image.open('results.png').resize(img.size)
+             asciiart(inputf, SC, GCF, "results.png")   #default color, black to blue
+             asciiart(inputf, SC, GCF, "results_pink.png","blue","pink")
+             img = Image.open(img1)
+             img2 = Image.open('results.png').resize(img.size)
 	def load_image(filename, size=(512,512)):
 		# load image with the preferred size
 		pixels = load_img(filename, target_size=size)
