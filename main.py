@@ -78,7 +78,7 @@ def main():
 	    prediction=  prediction.numpy()
 	    with col2:
 		st.image(prediction)
-
+		
     elif choice == 'URL':
         st.sidebar.header('配置')
 
