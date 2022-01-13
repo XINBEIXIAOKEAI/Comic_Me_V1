@@ -153,11 +153,11 @@ def imgGen2(img1):
 
 		    #out_f = out_f.resize((1280,720))
                  newImg.save(out_f)
-	def imgGen2(img1):
-		inputf = img1  # Input image file name
+        def imgGen2(img1):
+             inputf = img1  # Input image file name
 
-		SC = 0.1    # pixel sampling rate in width
-		GCF= 2      # contrast adjustment
+             SC = 0.1    # pixel sampling rate in width
+             GCF= 2      # contrast adjustment
 
 		asciiart(inputf, SC, GCF, "results.png")   #default color, black to blue
 		asciiart(inputf, SC, GCF, "results_pink.png","blue","pink")
