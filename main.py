@@ -75,7 +75,7 @@ def imgGen2(img1):
         gamma = st.sidebar.slider('Gamma 調整', min_value=0.1, max_value=3.0,value=1.0,step=0.1) # change the value here to get different result
         
         Image = st.file_uploader('在這上傳您的檔案',type=['jpg','jpeg','png'])
-		if file_uploader is not None:
+        if file_uploader is not None:
 		    col1, col2 = st.beta_columns(2)
 		    Image = Image.read()
 		    Image = tf.image.decode_image(Image, channels=3).numpy()                  
