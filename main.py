@@ -69,7 +69,7 @@ def imgGen2(img1):
     choice = st.sidebar.selectbox('選擇上傳方式 ?', menu)
 
     if choice == 'Image Based':
-    Image = st.file_uploader('在這上傳您的檔案',type=['jpg','jpeg','png'])
+        Image = st.file_uploader('在這上傳您的檔案',type=['jpg','jpeg','png'])
         st.sidebar.header('配置')
         outputsize = st.sidebar.selectbox('輸出尺寸', [384,512,768])
         Autocrop = st.sidebar.checkbox('自動裁剪照片',value=True) 
