@@ -79,7 +79,7 @@ def main():
             with col2:
                 st.image(prediction)
                 
-	def asciiart(in_f, SC, GCF,  out_f, color1='black', color2='blue', bgcolor='white'):
+	    def asciiart(in_f, SC, GCF,  out_f, color1='black', color2='blue', bgcolor='white'):
 
     # The array of ascii symbols from white to black
 		chars = np.asarray(list(' .,:irs?@9B&#'))
