@@ -106,7 +106,7 @@ def imgGen2(img1):
 
 		    #open the input file
                  img = Image.open(in_f)
-		 	st.image(img)
+                     st.image(img)
 
 
 		    #Based on the desired output image size, calculate how many ascii letters are needed on the width and height
