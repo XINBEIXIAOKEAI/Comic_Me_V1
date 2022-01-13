@@ -35,20 +35,6 @@ def model_load():
 
 
 
-def imgGen2(img1):
-    inputf = img1  # Input image file name
-
-    SC = 0.1    # pixel sampling rate in width
-    GCF= 2      # contrast adjustment
-
-    asciiart(inputf, SC, GCF, "results.png")   #default color, black to blue
-    asciiart(inputf, SC, GCF, "results_pink.png","blue","pink")
-    img = Image.open(img1)
-    img2 = Image.open('results.png').resize(img.size)
-  #img2.save('result.png')
-  #img3 = Image.open('results_pink.png').resize(img.size)
-  #img3.save('resultp.png')
-    return img2	
 
 
 	
