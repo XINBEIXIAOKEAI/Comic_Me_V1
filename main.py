@@ -174,19 +174,19 @@ def imgGen2(img1):
              pixels = expand_dims(pixels, 0)
              return pixels
 	    #src_image = load_image(file_uploader)
-            image = Image.open(file_uploader)	
+             image = Image.open(file_uploader)	
 
-	    st.image(file_uploader, caption='Input Image', use_column_width=True)
+             st.image(file_uploader, caption='Input Image', use_column_width=True)
 	    #st.write(os.listdir())
-	    im = imgGen2(file_uploader)	
-	    st.image(im, caption='ASCII art', use_column_width=True)
+             im = imgGen2(file_uploader)	
+             st.image(im, caption='ASCII art', use_column_width=True)
     #src_image = load_image(file_uploader)
-	    image = Image.open(file_uploader)	
+             image = Image.open(file_uploader)	
 
-	    st.image(file_uploader, caption='Input Image', use_column_width=True)
+             st.image(file_uploader, caption='Input Image', use_column_width=True)
     #st.write(os.listdir())
-	    im = imgGen2(file_uploader)	
-	    st.image(im, caption='ASCII art', use_column_width=True) 
+             im = imgGen2(file_uploader)	
+             st.image(im, caption='ASCII art', use_column_width=True) 
 
 
 
